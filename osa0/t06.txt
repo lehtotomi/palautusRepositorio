@@ -1,0 +1,12 @@
+note over selain:
+selain suorittaa tapahtumankäsittelijän
+joka lisää uuden muistiinpanon näytölle
+ja lopuksi lähettää uuden muistiinpanon palvelimelle
+end note
+
+selain->palvelin: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+
+note over palvelin:
+palvelin päivittää uuden muistiinpanon palvelimelle.
+end note
+
