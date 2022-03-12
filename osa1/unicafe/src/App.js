@@ -28,22 +28,30 @@ const Stat = (props) => {
 
 
 
-const Display = (props) => {
+const Statistics = (props) => {
   const all = props.stat1 + props.stat2 + props.stat3
   const average = (props.stat1 - props.stat3) / all
   const positive = (props.stat1) / all 
-
-  return (
-    <>
-    <Stat name='good' stat={props.stat1}/>
-    <Stat name='neutral' stat={props.stat2}/>
-    <Stat name='bad' stat={props.stat3}/>
-    <Stat name='all' stat={all}/>
-    <Stat name='average' stat={average}/>
-    <Stat name='positive' stat={positive} after="%"/> 
-    </>
-  )
+  if (all !== 0){
+    return (
+      <>
+      <Stat name='good' stat={props.stat1}/>
+      <Stat name='neutral' stat={props.stat2}/>
+      <Stat name='bad' stat={props.stat3}/>
+      <Stat name='all' stat={all}/>
+      <Stat name='average' stat={average}/>
+      <Stat name='positive' stat={positive} after="%"/> 
+      </>
+    )
+  } else {
+    return (
+      <p>
+        No feedback given.
+      </p>
+    )
+  }
 }
+
 
 const App = () => {
   // tallenna napit omaan tilaansa
@@ -58,7 +66,7 @@ const App = () => {
       <Button handleClick={() => setNeutral(neutral + 1)} text='neutral'/>
       <Button handleClick={() => setBad(bad + 1)} text='bad'/>
       <Header text='statistics'/>
-      <Display stat1={good} stat2={neutral} stat3={bad}/>
+      <Statistics stat1={good} stat2={neutral} stat3={bad}/>
     </div>
   )
 }
