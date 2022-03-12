@@ -33,7 +33,7 @@ const StatisticLine = (props) => {
 const Statistics = (props) => {
   const all = props.stat1 + props.stat2 + props.stat3
   const average = (props.stat1 - props.stat3) / all
-  const positive = (props.stat1) / all 
+  const positive = ((props.stat1) / all) * 100 
   if (all !== 0){
     return (
       <>
