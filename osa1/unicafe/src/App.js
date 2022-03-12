@@ -18,11 +18,14 @@ const Button = (props) => (
   </>
 )
 
+ 
+
 const StatisticLine = (props) => {
   return (
-    <p>
-      {props.name} {props.stat} {props.after}
-    </p>
+    <tr>
+      <td> {props.name} </td>
+      <td> {props.stat} {props.after} </td>
+    </tr>
   )
 }
 
@@ -45,9 +48,9 @@ const Statistics = (props) => {
     )
   } else {
     return (
-      <p>
-        No feedback given.
-      </p>
+      <tr>
+        <td> No feedback given.</td>
+      </tr>
     )
   }
 }
@@ -66,7 +69,11 @@ const App = () => {
       <Button handleClick={() => setNeutral(neutral + 1)} text='neutral'/>
       <Button handleClick={() => setBad(bad + 1)} text='bad'/>
       <Header text='statistics'/>
-      <Statistics stat1={good} stat2={neutral} stat3={bad}/>
+      <table>
+        <tbody>
+          <Statistics stat1={good} stat2={neutral} stat3={bad}/>
+        </tbody>
+      </table>
     </div>
   )
 }
