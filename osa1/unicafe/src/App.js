@@ -9,6 +9,7 @@ const Header = (props) => {
     )
 }
 
+
 const Button = (props) => (
   <>
     <button onClick={props.handleClick}>
@@ -19,7 +20,6 @@ const Button = (props) => (
 )
 
  
-
 const StatisticLine = (props) => {
   return (
     <tr>
@@ -30,7 +30,6 @@ const StatisticLine = (props) => {
 }
 
 
-
 const Statistics = (props) => {
   const all = props.stat1 + props.stat2 + props.stat3
   const average = (props.stat1 - props.stat3) / all
@@ -38,12 +37,12 @@ const Statistics = (props) => {
   if (all !== 0){
     return (
       <>
-      <StatisticLine name='good' stat={props.stat1}/>
-      <StatisticLine name='neutral' stat={props.stat2}/>
-      <StatisticLine name='bad' stat={props.stat3}/>
-      <StatisticLine name='all' stat={all}/>
-      <StatisticLine name='average' stat={average}/>
-      <StatisticLine name='positive' stat={positive} after="%"/> 
+        <StatisticLine name='good' stat={props.stat1}/>
+        <StatisticLine name='neutral' stat={props.stat2}/>
+        <StatisticLine name='bad' stat={props.stat3}/>
+        <StatisticLine name='all' stat={all}/>
+        <StatisticLine name='average' stat={average}/>
+        <StatisticLine name='positive' stat={positive} after="%"/> 
       </>
     )
   } else {
@@ -57,7 +56,6 @@ const Statistics = (props) => {
 
 
 const App = () => {
-  // tallenna napit omaan tilaansa
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
