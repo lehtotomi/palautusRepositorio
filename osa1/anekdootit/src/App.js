@@ -16,6 +16,15 @@ const Button = (props) => (
 )
 
 
+const Header = (props) => {
+  return (
+    <h1> 
+      {props.text}
+    </h1>
+  )
+}
+
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -27,8 +36,7 @@ const App = () => {
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when dianosing patients.'
   ]
   
-  const [selected, setSelected] = useState(0)
-  
+  const [selected, setSelected] = useState(0)  
   const [points, updatePoints] = useState(Array(anecdotes.length).fill(0));
 
   const increasePoints = (key,value) => {
@@ -39,14 +47,29 @@ const App = () => {
     updatePoints(points2)
   }
 
+  const mostPoints = () => {
+    return (
+      Math.max(...points)
+    )
+  }
+
+  const mostVotedAnecdote = () => {
+    return (
+      anecdotes[points.indexOf(mostPoints())]
+    )
+  }
 
   return (
     <div>
-      {anecdotes[selected]} <br />
-      This anecdote has {points[selected]} votes!<br /> 
+      <Header text="Anecdote of the day:" />
+      {anecdotes[selected]} <br/>
+      This anecdote has {points[selected]} votes! <br /> 
       <Button handleClick = {() => setSelected(randomInt(0,anecdotes.length-1))}
        text="get random anecdote" />
       <Button handleClick = {() => increasePoints(selected)} text="Vote"/>
+      <Header text="Most voted anecdote:" />
+      {mostVotedAnecdote()} <br/>
+      has {mostPoints()} votes
     </div>
   )
 }
