@@ -27,12 +27,12 @@ const Content = ({ parts }) => {
 }
 
 
-const Total = (props) => {
-  let summa = 0
-  props.parts.forEach(value => summa += value.exercises)
+const Total = ( {parts} ) => {
   return (
     <>
-      {summa}
+      {parts.reduce(
+        (summa, value) => summa + value.exercises, 0
+      )}
     </>
   )
 }
@@ -76,7 +76,7 @@ const App = () => {
       },
       {
         name: 'Fundamentals of React III',
-        exercises: 20,
+        exercises: 21,
         id: 5
       }
     ]
