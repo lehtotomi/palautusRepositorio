@@ -31,7 +31,6 @@ const Content = ({ parts }) => {
 }
   
   
-  
 const Total = ( {parts} ) => {
     return (
       <>
