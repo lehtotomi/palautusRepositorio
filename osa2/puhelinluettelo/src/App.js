@@ -1,9 +1,21 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import AddPersonForm from './components/AddPersonForm'
 import FilterForm from './components/FilterForm'
 import Numbers from './components/Numbers'
+import axios from 'axios'
 
 const App = () => {
+  
+  const hook = () => {
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        setPersons(response.data)
+      })
+  }
+  
+  useEffect(hook, [])
+  
   const [persons, setPersons] = useState([
     { name: 'Arto Hellas',
     number: "0404040"
