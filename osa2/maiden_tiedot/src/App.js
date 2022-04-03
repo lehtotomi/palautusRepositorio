@@ -27,7 +27,11 @@ function App() {
         setFilter={setFilter}
         newFilter={newFilter}
         handleFilterChange={handleFilterChange}/>
-      <Countries coutries={countries} filter={newFilter} />
+      <Countries 
+        coutries={countries}
+        filter={newFilter}
+        setFilter={setFilter}
+      />
     </div>
     
   )

@@ -39,7 +39,12 @@ const App = () => {
     }
     
     if (!persons.some(p => p.name === personObject.name)){
-      setPersons(persons.concat(personObject)) 
+      axios
+      .post('http://localhost:3001/persons', personObject)
+      .then(response => {
+        setPersons(persons.concat(response.data))
+      })
+      //setPersons(persons.concat(personObject)) 
     } else {
       alert(`${personObject.name} is already added to the phonebook!`);
     }
@@ -62,7 +67,7 @@ const App = () => {
   const handleFilterChange = (event) => {
     setNewFilter(event.target.value)
   }
-
+  
   return (
     <div>
       <h2> Phonebook </h2>
