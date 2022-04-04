@@ -3,19 +3,18 @@ import AddPersonForm from './components/AddPersonForm'
 import FilterForm from './components/FilterForm'
 import Numbers from './components/Numbers'
 import axios from 'axios'
+import NumberService from './components/NumberService'
 
 const App = () => {
   
-  const hook = () => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        setPersons(response.data)
+  useEffect(() => {
+    NumberService
+    .getAll()
+    .then(response => {
+        setPersons(response)
       })
-  }
-  
-  useEffect(hook, [])
-  
+  },[])
+
   const [persons, setPersons] = useState([
     { name: 'Arto Hellas',
     number: "0404040"
@@ -39,14 +38,27 @@ const App = () => {
     }
     
     if (!persons.some(p => p.name === personObject.name)){
-      axios
-      .post('http://localhost:3001/persons', personObject)
-      .then(response => {
-        setPersons(persons.concat(response.data))
-      })
-      //setPersons(persons.concat(personObject)) 
+      NumberService
+        .create(personObject)
+        .then(response => {
+          setPersons(persons.concat(response.data))
+        })
     } else {
-      alert(`${personObject.name} is already added to the phonebook!`);
+      let oldPerson = persons.find(p => p.name === personObject.name)
+      let msg = `${personObject.name} is already in the phonebook! Replace the old phonenumber?`
+      if (window.confirm(msg)){
+            NumberService
+              .replace(oldPerson, personObject)
+                .then(response => 
+                  setPersons(
+                    persons.map(
+                      p => 
+                        p.name === personObject.name 
+                          ? {...p, number: personObject.number} : p
+                    )
+                  )
+                )
+          }
     }
     setNewName('')
     setNewNumber('')
@@ -89,7 +101,12 @@ const App = () => {
       
       <h3> Numbers </h3>
       
-      <Numbers numbers={persons} filter={newFilter} />
+      <Numbers 
+        numbers={persons}
+        filter={newFilter} 
+        setPersons={setPersons}
+      />
+
     </div>
   )
 }
