@@ -1,7 +1,7 @@
 
 import DeleteButton from './DeleteButton'
 
-const Numbers = ( {numbers, filter, setPersons} ) => {
+const Numbers = ( {numbers, filter, setPersons, setSuccessNotification} ) => {
     return (
       <ul>
         {numbers.filter(
@@ -10,8 +10,9 @@ const Numbers = ( {numbers, filter, setPersons} ) => {
                         {number.name} {number.number}
                         <DeleteButton
                           person={number}
-                          setPersons={setPersons}
                           persons={numbers}
+                          setPersons={setPersons}
+                          setSuccessNotification={setSuccessNotification}
                         /> 
                       </li>
         )}

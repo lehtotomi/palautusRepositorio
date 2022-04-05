@@ -4,6 +4,7 @@ import FilterForm from './components/FilterForm'
 import Numbers from './components/Numbers'
 import axios from 'axios'
 import NumberService from './components/NumberService'
+import Notification from './components/Notification'
 
 const App = () => {
   
@@ -27,7 +28,29 @@ const App = () => {
     }
   ])  
   
+  const [errorMessage, setErrorMessage] = useState(null)
+
+  const [successMessage, setSuccessMessage] = useState(null)
+
   const [newName, setNewName] = useState('')
+
+  const setNotification = ( message, type ) =>  {
+    if (type === 'error'){
+      setErrorMessage(message)
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+    }
+    else if (type === 'success'){
+      setSuccessMessage(message)
+      setTimeout(() => {
+        setSuccessMessage(null)
+      }, 5000)
+    } 
+    else {
+      alert("INVALID TYPE FOR NOTIFICATION")
+    }
+  }
 
   const addPerson = (event) => {
     event.preventDefault()
@@ -36,12 +59,15 @@ const App = () => {
       name: newName,
       number: newNumber
     }
-    
     if (!persons.some(p => p.name === personObject.name)){
       NumberService
         .create(personObject)
         .then(response => {
           setPersons(persons.concat(response.data))
+          setNotification(`Added '${personObject.name}' succesfully!`,'success')
+        })
+        .catch(error => {
+          setNotification(`Adding '${personObject.name}' failed!`, 'error')
         })
     } else {
       let oldPerson = persons.find(p => p.name === personObject.name)
@@ -49,7 +75,7 @@ const App = () => {
       if (window.confirm(msg)){
             NumberService
               .replace(oldPerson, personObject)
-                .then(response => 
+                .then(response => { 
                   setPersons(
                     persons.map(
                       p => 
@@ -57,7 +83,11 @@ const App = () => {
                           ? {...p, number: personObject.number} : p
                     )
                   )
-                )
+                  setNotification(`Changing ${oldPerson.name}'s number succeeded!`, 'success')
+                })
+                .catch(error => {
+                  setNotification(`Changing ${oldPerson.name}'s number failed!`, 'error')
+                })
           }
     }
     setNewName('')
@@ -83,7 +113,8 @@ const App = () => {
   return (
     <div>
       <h2> Phonebook </h2>
-      
+      <Notification message={errorMessage} type="error" />
+      <Notification message={successMessage} type="success" />
       <FilterForm 
         newFilter={newFilter}
         handleFilterChange={handleFilterChange}
@@ -103,8 +134,9 @@ const App = () => {
       
       <Numbers 
         numbers={persons}
-        filter={newFilter} 
-        setPersons={setPersons}
+        filter={newFilter}
+        setPersons={setPersons} 
+        setSuccessNotification={setNotification}
       />
 
     </div>
