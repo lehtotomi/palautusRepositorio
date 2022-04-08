@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import AddPersonForm from './components/AddPersonForm'
 import FilterForm from './components/FilterForm'
 import Numbers from './components/Numbers'
-import axios from 'axios'
 import NumberService from './components/NumberService'
 import Notification from './components/Notification'
 
