@@ -85,6 +85,7 @@ const App = () => {
                   setNotification(`Changing ${oldPerson.name}'s number succeeded!`, 'success')
                 })
                 .catch(error => {
+                  console.log(error.response.data)
                   setNotification(`Changing ${oldPerson.name}'s number failed! error: ${JSON.stringify(error.response.data)}`, 'error')
                 })
           }
