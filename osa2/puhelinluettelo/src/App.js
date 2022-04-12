@@ -67,6 +67,7 @@ const App = () => {
         })
         .catch(error => {
           console.log(error)
+          console.log(error.response.data)
           setNotification(`Adding '${personObject.name}' failed! error: ${error.response.data}`, 'error')
         })
     } else {
@@ -87,6 +88,7 @@ const App = () => {
                 })
                 .catch(error => {
                   console.log(error)
+                  console.log(error.response.data)
                   setNotification(`Changing ${oldPerson.name}'s number failed! error: ${error.response.data}`, 'error')
                 })
           }
