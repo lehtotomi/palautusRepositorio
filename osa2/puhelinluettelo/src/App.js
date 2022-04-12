@@ -66,6 +66,7 @@ const App = () => {
           setNotification(`Added '${personObject.name}' succesfully!`,'success')
         })
         .catch(error => {
+          console.log(error)
           setNotification(`Adding '${personObject.name}' failed! error: ${JSON.stringify(error.response.data)}`, 'error')
         })
     } else {
