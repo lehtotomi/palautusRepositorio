@@ -67,8 +67,8 @@ const App = () => {
         })
         .catch(error => {
           console.log(error)
-          console.log(error.response.data)
-          setNotification(`Adding '${personObject.name}' failed! error: ${error.response.data}`, 'error')
+          console.log(error.response.data.error)
+          setNotification(`Adding '${personObject.name}' failed! error: ${error.response.data.error}`, 'error')
         })
     } else {
       let oldPerson = persons.find(p => p.name === personObject.name)
