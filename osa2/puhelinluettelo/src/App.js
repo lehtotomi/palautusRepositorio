@@ -67,7 +67,7 @@ const App = () => {
         })
         .catch(error => {
           console.log(error)
-          setNotification(`Adding '${personObject.name}' failed! error: ${JSON.stringify(error.response.data)}`, 'error')
+          setNotification(`Adding '${personObject.name}' failed! error: ${error.response.data}`, 'error')
         })
     } else {
       let oldPerson = persons.find(p => p.name === personObject.name)
@@ -86,8 +86,8 @@ const App = () => {
                   setNotification(`Changing ${oldPerson.name}'s number succeeded!`, 'success')
                 })
                 .catch(error => {
-                  console.log(error.response.data)
-                  setNotification(`Changing ${oldPerson.name}'s number failed! error: ${JSON.stringify(error.response.data)}`, 'error')
+                  console.log(error)
+                  setNotification(`Changing ${oldPerson.name}'s number failed! error: ${error.response.data}`, 'error')
                 })
           }
     }
